@@ -1,48 +1,51 @@
 {% extends "core/base.html" %}
-{% block title %}SkyNova • 首页{% endblock %}
-{% block content %}
-  <!-- 可替换为航拍视频背景 -->
-  <div class="ratio ratio-16x9 mb-4">
-    <video autoplay loop muted>
-      <source src="static/media/flight.mp4" type="video/mp4">
-    </video>
-  </div>
+{% load static %}
 
-  <!-- 核心卖点区（Vue 渲染示例） -->
-  <div id="selling-points" class="row text-center mb-5">
-    <div class="col-md-4 mb-3" v-for="item in points" :key="item.id">
-      <div class="card h-100"
-           :style="{
-             width: 'var(--card-width)',
-             height: 'var(--card-height)',
-             backgroundColor: item.bgColor
-           }">
-        <div class="card-body">
-          <i :class="item.icon" style="font-size: 2rem; color: var(--heading-color)"></i>
-          <h5 class="card-title mt-3" style="color: var(--heading-color)">
-            {{ item.title }}
-          </h5>
-          <p class="card-text" style="color: var(--text-color)">
-            {{ item.text }}
-          </p>
+{% block title %}SkyNova • 首页{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/theme-dark.css' %}">
+{% endblock %}
+{% block body_class %}dark-theme{% endblock %}
+
+{% block content %}
+<div class="hero" id="hero">
+  <video id="bg-video" autoplay muted loop>
+    <source src="{% static 'media/flight.mp4' %}" type="video/mp4">
+  </video>
+  <div class="hero-content">
+    <h1>标语</h1>
+    <!-- 新的卡片容器：宽度 4/6，居中 -->
+    <div class="card-container">
+      <a href="{% url 'products' %}" class="card text-white bg-dark">
+        <div class="card-body  d-flex flex-column align-items-center gap-2">
+          <h3 class="card-title">产品中心</h3>
+          <p class="discription">本公司的所有产品</p>
         </div>
-      </div>
+      </a>
+      <a href="{% url 'industry' %}" class="card text-white bg-dark">
+        <div class="card-body  d-flex flex-column align-items-center gap-2">
+          <h3 class="card-title">行业解决方案</h3>
+          <p class="discription">针对不同行业的难题，我们提供了不同的解决方案</p>
+        </div>
+      </a>
+      <a href="{% url 'news_list' %}" class="card text-white bg-dark">
+        <div class="card-body  d-flex flex-column align-items-center gap-2">
+          <h3 class="card-title">新闻动态</h3>
+          <p class="discription">看看我们的最新成果！</p>
+        </div>
+      </a>
     </div>
   </div>
-{% endblock %}
-
-{% block extra_js %}
+</div>
 <script>
-  Vue.createApp({
-    data() {
-      return {
-        points: [
-          { id:1, icon:'bi bi-speedometer2', title:'高效飞行', text:'最长续航 2 小时', bgColor:'#e9f5ff' },
-          { id:2, icon:'bi bi-bar-chart-line', title:'智能分析', text:'实时性能监控', bgColor:'#fff5e9' },
-          { id:3, icon:'bi bi-shield-lock', title:'安全可靠', text:'多重冗余设计', bgColor:'#f0ffe9' },
-        ]
-      }
-    }
-  }).mount('#selling-points')
+document.addEventListener('DOMContentLoaded', () => {
+  const video = document.getElementById('bg-video'),
+        hero = document.getElementById('hero');
+  setTimeout(() => {
+    video.classList.add('fade-out');
+    hero.classList.add('active');
+  }, 1000);
+});
 </script>
 {% endblock %}
+

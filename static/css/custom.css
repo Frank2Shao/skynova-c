@@ -1,11 +1,43 @@
 /* static/css/custom.css */
 /* 全局背景色 */
-body {
-  background-color: #f8f9fa;
+:root {
+  --navbar-height: 80px;
+  --card-width: 300px;
+  --card-height: 200px;
+  --text-color: #333;
+  --heading-color: #0056b3;
+  --btn-bg: #0069d9;
+  --btn-color: #fff;
 }
 
-/* 卡片圆角与阴影，可按需微调 */
-.card {
-  border-radius: 0.5rem;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+body {
+  background-color: var(--bg-color, #fff);
+  color: var(--text-color);
+  padding-top: var(--navbar-height);
+}
+
+.navbar {
+  height: var(--navbar-height);
+}
+
+.navbar-brand,
+.navbar-nav {
+  align-items: center;
+}
+
+.navbar .nav-link {
+  font-size: 1.25rem;
+  padding: 0 1.75rem;
+}
+
+.navbar-brand img {
+  height: calc(var(--navbar-height) * 0.6);
+  width: auto;
+}
+
+.navbar-brand span {
+  margin-left: 1rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: inherit;
 }

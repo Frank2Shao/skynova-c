@@ -1,0 +1,91 @@
+/* static/css/theme-dark.css */
+:root {
+    --bg-color: #0a0f1c;
+    --text-color: #ffffff;
+    --heading-color: #1e90ff;
+    --btn-bg: #1e90ff;
+    --btn-color: #ffffff;
+  }
+  
+  body.dark-theme {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+  }
+  
+  .hero {
+    position: relative;
+    width: 100%; height: 100vh;
+    overflow: hidden;
+  }
+  .hero video {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: opacity 1s ease;
+    z-index: 0;
+  }
+  .hero video.fade-out { opacity: 0.3; }
+  .hero::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: rgba(0,0,0,0.5);
+    opacity: 0;
+    transition: opacity 2s ease 2s;
+    z-index: 1;
+  }
+  .hero.active::after { opacity: 1; }
+  
+  .hero-content {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    text-align: center; opacity: 0;
+    animation: fadeIn 1s forwards 1s;
+    z-index: 2;
+  }
+  @keyframes fadeIn { to { opacity: 1; } }
+  .hero-content h1 {
+    font-size: 4rem;
+    margin-bottom: 2rem;
+    color: var(--text-color);
+  }
+  .hero-content .btn {
+    min-width: 160px;
+    margin: 0 0.5rem;
+    font-size: 1.1rem;
+  }
+  
+  /* 卡片容器：占据 4/6 的视口宽度，并居中 */
+.hero-content .card-container {
+    width: 70%;
+    max-width: 900px;      /* 可根据实际机型再调 */
+    margin: 1.5rem auto 0; /* 顶部留白 */
+    display: flex;
+    gap: 3rem;
+    z-index: 2;
+  }
+  
+  /* 每个卡片平分容器宽度，高度固定 */
+  .hero-content .card {
+    flex: 1;
+    height: 200px;
+    border: 2px solid var(--btn-bg);
+    transition: transform .3s;
+  }
+  
+  .hero-content .card:hover {
+    transform: translateY(-5px);
+  }
+  
+  /* 卡片内部文字居中 */
+  .hero-content .card-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+  
+  .hero-content .card-title {
+    font-size: 2rem;
+    margin: 0;
+  }
