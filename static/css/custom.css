@@ -1,0 +1,11 @@
+/* static/css/custom.css */
+/* 全局背景色 */
+body {
+  background-color: #f8f9fa;
+}
+
+/* 卡片圆角与阴影，可按需微调 */
+.card {
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}

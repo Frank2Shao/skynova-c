@@ -1,0 +1,48 @@
+{% extends "core/base.html" %}
+{% block title %}SkyNova • 首页{% endblock %}
+{% block content %}
+  <!-- 可替换为航拍视频背景 -->
+  <div class="ratio ratio-16x9 mb-4">
+    <video autoplay loop muted>
+      <source src="static/media/flight.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <!-- 核心卖点区（Vue 渲染示例） -->
+  <div id="selling-points" class="row text-center mb-5">
+    <div class="col-md-4 mb-3" v-for="item in points" :key="item.id">
+      <div class="card h-100"
+           :style="{
+             width: 'var(--card-width)',
+             height: 'var(--card-height)',
+             backgroundColor: item.bgColor
+           }">
+        <div class="card-body">
+          <i :class="item.icon" style="font-size: 2rem; color: var(--heading-color)"></i>
+          <h5 class="card-title mt-3" style="color: var(--heading-color)">
+            {{ item.title }}
+          </h5>
+          <p class="card-text" style="color: var(--text-color)">
+            {{ item.text }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  Vue.createApp({
+    data() {
+      return {
+        points: [
+          { id:1, icon:'bi bi-speedometer2', title:'高效飞行', text:'最长续航 2 小时', bgColor:'#e9f5ff' },
+          { id:2, icon:'bi bi-bar-chart-line', title:'智能分析', text:'实时性能监控', bgColor:'#fff5e9' },
+          { id:3, icon:'bi bi-shield-lock', title:'安全可靠', text:'多重冗余设计', bgColor:'#f0ffe9' },
+        ]
+      }
+    }
+  }).mount('#selling-points')
+</script>
+{% endblock %}
