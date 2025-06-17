@@ -1,0 +1,1 @@
+import{_ as o,c as a,a as s,o as t}from"./index-xP5tA43O.js";const n={class:"container py-5"},c={__name:"NewsCompliance",setup(_){return(p,e)=>(t(),a("div",n,e[0]||(e[0]=[s("h1",null,"新闻合规",-1),s("p",null,"关注我们的最新动态，以及行业合规与政策解读。",-1)])))}},l=o(c,[["__scopeId","data-v-35565069"]]);export{l as default};

@@ -35,7 +35,11 @@
   }
   </script>
   
-  <style scoped>
-  /* 页面级样式，可根据需要补充 */
+  <style>
+  /* Ensure all article content is dark to override theme */
+  article.container,
+  article.container * {
+    color: #222222 !important;
+  }
   </style>
   

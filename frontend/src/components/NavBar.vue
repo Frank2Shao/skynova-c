@@ -44,11 +44,15 @@
                 <i v-else class="bi bi-person-circle" style="font-size:1.5rem;"></i>
               </a>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                <li v-if="isAuthenticated"><RouterLink class="dropdown-item" to="/profile">我的主页</RouterLink></li>
-                <li v-if="isAuthenticated"><hr class="dropdown-divider" /></li>
-                <li v-if="isAuthenticated"><a class="dropdown-item" href="#" @click="logout">退出登录</a></li>
-                <li v-else-if="!isAuthenticated"><RouterLink class="dropdown-item" to="/login">登录</RouterLink></li>
-                <li v-else><RouterLink class="dropdown-item" to="/signup">注册</RouterLink></li>
+                <template v-if="isAuthenticated">
+                  <li><RouterLink class="dropdown-item" to="/profile">我的主页</RouterLink></li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li><a class="dropdown-item" href="#" @click="logout">退出登录</a></li>
+                </template>
+                <template v-else>
+                  <li><a class="dropdown-item" href="#" @click.prevent="openLoginPopup">登录</a></li>
+                  <li><a class="dropdown-item" href="#" @click.prevent="openSignupPopup">注册</a></li>
+                </template>
               </ul>
             </li>
           </ul>
@@ -57,28 +61,72 @@
     </nav>
   </template>
   
-  <script>
-  export default {
-    name: 'NavBar',
-    computed: {
-      isAuthenticated() {
-        // TODO: 接入实际认证状态，例如 Vuex 或 Pinia
-        return false
-      },
-      avatarUrl() {
-        // TODO: 用户头像逻辑
-        return '/static/media/default_avatar.png'
+  <script setup>
+  import { ref, onMounted } from 'vue'
+  import { RouterLink } from 'vue-router'
+  import AuthService from '../services/auth.js'
+
+  const isAuthenticated = ref(false)
+  const currentUser = ref(null)
+  const avatarUrl = ref('/static/media/default_avatar.png')
+
+  // Check user authentication status on component mount
+  onMounted(async () => {
+    try {
+      const status = await AuthService.getUserStatus()
+      if (status.authenticated) {
+        isAuthenticated.value = true
+        currentUser.value = status.user
+      } else {
+        isAuthenticated.value = false
+        currentUser.value = null
       }
-    },
-    methods: {
-      logout() {
-        // TODO: 调用登出 API 或清除 Token
-      }
+    } catch (error) {
+      console.error('Failed to check user status:', error)
+      // If status check fails, assume not authenticated
+      isAuthenticated.value = false
+      currentUser.value = null
+    }
+  })
+
+  const openLoginPopup = async () => {
+    try {
+      const user = await AuthService.openAuthPopup('login')
+      isAuthenticated.value = true
+      currentUser.value = user
+      console.log('Login successful:', user)
+    } catch (error) {
+      console.error('Login failed:', error.message)
+    }
+  }
+
+  const openSignupPopup = async () => {
+    try {
+      const user = await AuthService.openAuthPopup('signup')
+      // Note: For signup, user might not be immediately authenticated
+      // if email verification is required
+      console.log('Signup initiated:', user)
+    } catch (error) {
+      console.error('Signup failed:', error.message)
+    }
+  }
+
+  const logout = async () => {
+    try {
+      await AuthService.logout()
+      isAuthenticated.value = false
+      currentUser.value = null
+      console.log('Logout successful')
+    } catch (error) {
+      console.error('Logout failed:', error)
     }
   }
   </script>
   
   <style scoped>
-  /* 如需局部样式，可写在这里 */
+  .navbar-brand h1 {
+    font-weight: 600;
+    color: #ffffff;
+  }
   </style>
   

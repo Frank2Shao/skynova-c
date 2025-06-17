@@ -19,5 +19,5 @@ export default defineConfig({
     outDir: '../backend/static/dist',
     emptyOutDir: true
   },
-  base: '/'
+  base: '/static/dist/'
 })

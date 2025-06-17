@@ -19,10 +19,21 @@ const router = createRouter({
       name: 'signup',
       component: () => import('../views/Signup.vue'),
     },
+    // Authentication popup routes
+    {
+      path: '/auth/login',
+      name: 'auth-login',
+      component: () => import('../views/AuthLogin.vue'),
+    },
+    {
+      path: '/auth/signup',
+      name: 'auth-signup',
+      component: () => import('../views/AuthSignup.vue'),
+    },
     {
       path: '/industry',
-      name: 'industry',
-      component: () => import('../views/Industry.vue'),
+      name: 'industry-solution-list',
+      component: () => import('../views/IndustrySolutionList.vue'),
     },
     {
       path: '/news',
@@ -30,7 +41,7 @@ const router = createRouter({
       component: () => import('../views/NewsList.vue'),
     },
     {
-      path: '/news/:id',
+      path: '/news/:slug',
       name: 'news-detail',
       component: () => import('../views/NewsDetail.vue'),
     },
@@ -45,9 +56,19 @@ const router = createRouter({
       component: () => import('../views/ProductList.vue'),
     },
     {
+      path: '/products/:sku',
+      name: 'product-detail',
+      component: () => import('../views/ProductDetail.vue'),
+    },
+    {
       path: '/support',
       name: 'support',
       component: () => import('../views/Support.vue'),
+    },
+    {
+      path: '/solutions/:id',
+      name: 'solution-detail',
+      component: () => import('../views/SolutionDetail.vue'),
     },
   ],
 })

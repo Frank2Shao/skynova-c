@@ -1,0 +1,1 @@
+import{_ as o,c as s,a as t,o as a}from"./index-xP5tA43O.js";const p={class:"container py-5"},r={__name:"Support",setup(n){return(_,e)=>(a(),s("div",p,e[0]||(e[0]=[t("h1",null,"支持服务",-1),t("p",null," 在这里您可以了解我们的售前咨询、培训支持、售后维护等服务内容。 ",-1)])))}},l=o(r,[["__scopeId","data-v-519e37f3"]]);export{l as default};

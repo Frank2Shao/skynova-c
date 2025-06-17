@@ -21,7 +21,7 @@
                   {{ post.title }}
                 </RouterLink>
               </h5>
-              <p class="card-text">{{ post.summary }}</p>
+              <p class="card-text">{{ post.description }}</p>
             </div>
             <div class="card-footer text-muted">
               {{ formatDate(new Date(post.created_at)) }}
@@ -45,7 +45,7 @@
   
   onMounted(async () => {
     const res = await axios.get('/api/news/')
-    posts.value = res.data
+    posts.value = res.data.news
   })
   
   const filtered = computed(() => {
@@ -53,7 +53,7 @@
     if (!q) return posts.value
     return posts.value.filter(p =>
       p.title.toLowerCase().includes(q) ||
-      p.summary.toLowerCase().includes(q)
+      p.description.toLowerCase().includes(q)
     )
   })
   

@@ -1,0 +1,1 @@
+import{_ as a,c as e,a as o,o as t}from"./index-xP5tA43O.js";const c={class:"container py-5"},n={__name:"Login",setup(_){return(r,s)=>(t(),e("div",c,s[0]||(s[0]=[o("h2",{class:"mb-4"},"登录",-1)])))}},i=a(n,[["__scopeId","data-v-f8ca9ac6"]]);export{i as default};
